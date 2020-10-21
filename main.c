@@ -1,21 +1,24 @@
 #include <stdio.h>
-#include "malloc.h"
+#include "memp.h"
 
 int main()
 {
 	char* p = NULL;
 
-	mem_init();			// 初始化内存池
+	mem_init();
 
-	p = mem_malloc(1024);									// 申请内存
-	printf("getused:%d\r\n", mem_getused());				// 获得内存使用量
-	printf("perused:%.2f%%\r\n", mem_perused());			// 获得内存使用率
+	p = mem_malloc(1024);
 
-	mem_memcpy(p, "HelloWorld", 10);						// 内存拷贝
-	printf("p:%s\r\n", p);									// 打印信息
+	printf("free:%dKB\n", mem_getfree());
+	printf("used:%dKB\n", mem_getused());
 
-	mem_free(p);											// 内存释放
-	printf("perused:%.2f\r\n", mem_perused());			// 再次查看内存使用率
+	mem_memcpy(p, "helloworld", 10);
+	printf("p:%s\n", p);
+
+	mem_free(p);
+
+	printf("free:%dKB\n", mem_getfree());
+	printf("used:%dKB\n", mem_getused());
 
 	return 0;
 }

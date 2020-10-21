@@ -1,7 +1,7 @@
 /*
  * malloc.h
  *
- *  Created on: 2019å¹´11æœˆ26æ—¥
+ *  Created on: 2019Äê11ÔÂ26ÈÕ
  *      Author: AnKun
  */
 
@@ -12,38 +12,38 @@
 #define NULL 0
 #endif
 
-#define MEM_BLOCK_SIZE		32											// å†…å­˜å—å¤§å°
-#define MEM_BLOCK_NUMS		1024										// å†…å­˜å—æ•°ç›®
-#define MEM_MAX_SIZE		(MEM_BLOCK_SIZE * MEM_BLOCK_NUMS)		// å†…å­˜æ± å¤§å°ï¼Œ32*1024=32KB
+#define MEM_BLOCK_SIZE		32                                      // ÄÚ´æ¿é´óĞ¡
+#define MEM_BLOCK_NUMS		1024                                    // ÄÚ´æ¿éÊıÄ¿
+#define MEM_MAX_SIZE		(MEM_BLOCK_SIZE * MEM_BLOCK_NUMS)		// ÄÚ´æ³Ø´óĞ¡£¬32*1024=32KB
 
-// å†…å­˜æ± åˆå§‹åŒ–
+// ÄÚ´æ³Ø³õÊ¼»¯
 void mem_init(void);
 
-// å†…å­˜é‡Šæ”¾
+// ÄÚ´æÊÍ·Å
 void mem_free(void* p);
 
-// å†…å­˜ç”³è¯·
+// ÄÚ´æÉêÇë
 void* mem_malloc(unsigned int size);
 
-// é‡æ–°è°ƒæ•´å·²æœ‰å†…å­˜å¤§å°
+// ÖØĞÂµ÷ÕûÒÑÓĞÄÚ´æ´óĞ¡
 void* mem_realloc(void* p, unsigned int size);
 
-// è·å¾—å†…å­˜ä½¿ç”¨ç‡
+// »ñµÃÄÚ´æÊ¹ÓÃÂÊ
 float mem_perused(void);
 
-// å†…å­˜è®¾ç½®
+// ÄÚ´æÉèÖÃ
 void mem_memset(void* dst, unsigned char val, unsigned int size);
 
-// å†…å­˜æ‹·è´
+// ÄÚ´æ¿½±´
 void mem_memcpy(void* dst, const void* src, unsigned int size);
 
-// è·å¾—å†…å­˜ä½¿ç”¨é‡
+// »ñµÃÄÚ´æÊ¹ÓÃÁ¿
 unsigned int mem_getused(void);
 
-// è·å¾—å†…å­˜ç©ºä½™é‡
+// »ñµÃÄÚ´æ¿ÕÓàÁ¿
 unsigned int mem_getfree(void);
 
-// è·å¾—å†…å­˜å¤§å°
+// »ñµÃÄÚ´æ´óĞ¡
 unsigned int mem_getsize(void);
 
 #endif /* MALLOC_H_ */

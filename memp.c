@@ -1,21 +1,21 @@
 /*
  * malloc.c
  *
- *  Created on: 2019å¹´11æœˆ26æ—¥
+ *  Created on: 2019Äê11ÔÂ26ÈÕ
  *      Author: AnKun
  */
 
 
-#include "malloc.h"
+#include "memp.h"
 
 __attribute__((aligned(4)))  unsigned char memory[MEM_MAX_SIZE];
 __attribute__((aligned(4)))  unsigned short memtbl[MEM_BLOCK_NUMS];
 
 /**
- * å†…å­˜æ‹·è´å‡½æ•°
- * @param dst  ç›®æ ‡åœ°å€
- * @param src  æºåœ°å€
- * @param size æ‹·è´å¤§å°
+ * ÄÚ´æ¿½±´º¯Êı
+ * @param dst  Ä¿±êµØÖ·
+ * @param src  Ô´µØÖ·
+ * @param size ¿½±´´óĞ¡
  */
 void mem_memcpy(void* dst, const void* src, unsigned int size)
 {
@@ -37,10 +37,10 @@ void mem_memcpy(void* dst, const void* src, unsigned int size)
 }
 
 /**
- * å†…å­˜è®¾ç½®å‡½æ•°
- * @param dst  ç›®æ ‡åœ°å€
- * @param val  è¦è®¾ç½®çš„å€¼
- * @param size å†…å­˜è¿ç»­è®¾ç½®çš„é•¿åº¦
+ * ÄÚ´æÉèÖÃº¯Êı
+ * @param dst  Ä¿±êµØÖ·
+ * @param val  ÒªÉèÖÃµÄÖµ
+ * @param size ÄÚ´æÁ¬ĞøÉèÖÃµÄ³¤¶È
  */
 void mem_memset(void* dst, unsigned char val, unsigned int size)
 {
@@ -63,9 +63,9 @@ void mem_memset(void* dst, unsigned char val, unsigned int size)
 }
 
 /**
- * å†…å­˜ç”³è¯·å‡½æ•°,ç”³è¯·çš„å†…å­˜ç©ºé—´ä¼šè¢«åˆå§‹åŒ–ä¸º0
- * @param size è¦ç”³è¯·çš„å¤§å°
- * @return     ç”³è¯·æˆåŠŸè¿”å›å†…å­˜åœ°å€ï¼Œå¤±è´¥è¿”å›NULL
+ * ÄÚ´æÉêÇëº¯Êı,ÉêÇëµÄÄÚ´æ¿Õ¼ä»á±»³õÊ¼»¯Îª0
+ * @param size ÒªÉêÇëµÄ´óĞ¡
+ * @return     ÉêÇë³É¹¦·µ»ØÄÚ´æµØÖ·£¬Ê§°Ü·µ»ØNULL
  */
 void* mem_malloc(unsigned int size)
 {
@@ -75,7 +75,7 @@ void* mem_malloc(unsigned int size)
 
 	if (!size)  return NULL;
 
-	nblocks = (size % MEM_BLOCK_SIZE) == 0 ? (size / MEM_BLOCK_SIZE) : (size / MEM_BLOCK_SIZE + 1);
+	nblocks = (size - 1) / MEM_BLOCK_SIZE + 1;
 
 	for (i = 0; i != MEM_BLOCK_NUMS; i++)
 	{
@@ -95,11 +95,10 @@ void* mem_malloc(unsigned int size)
 }
 
 /**
- * é‡æ–°ç”³è¯·å†…å­˜
- * æ³¨æ„:è‹¥newSize > pçš„size,åˆ™ä¼šé€ æˆpçš„å¤šä½™éƒ¨åˆ†å†…å®¹ä¸¢å¤±;è‹¥pä¸ºç©ºåœ°å€ï¼Œåˆ™ç­‰æ•ˆäºmem_mallocå‡½æ•°
- * @param p     æ—§åœ°å€
- * @param size  é‡æ–°ç”³è¯·çš„å¤§å°
- * @return      æ–°åœ°å€
+ * ÖØĞÂÉêÇëÄÚ´æ¿Õ¼ä
+ * @param p     ¾ÉµØÖ·
+ * @param size  ÖØĞÂÉêÇëµÄ´óĞ¡
+ * @return      ĞÂµØÖ·
  */
 void* mem_realloc(void* p, unsigned int newSize)
 {
@@ -122,8 +121,8 @@ void* mem_realloc(void* p, unsigned int newSize)
 }
 
 /**
- * å†…å­˜é‡Šæ”¾å‡½æ•°
- * @param p è¦é‡Šæ”¾çš„å†…å­˜åœ°å€
+ * ÄÚ´æÊÍ·Åº¯Êı
+ * @param p ÒªÊÍ·ÅµÄÄÚ´æµØÖ·
  */
 void mem_free(void* p)
 {
@@ -143,7 +142,7 @@ void mem_free(void* p)
 }
 
 /**
- * è·å¾—å†…å­˜ä½¿ç”¨ç‡
+ * »ñµÃÄÚ´æÊ¹ÓÃÂÊ
  */
 float mem_perused(void)
 {
@@ -157,7 +156,7 @@ float mem_perused(void)
 }
 
 /**
- * è·å¾—å†…å­˜ä½¿ç”¨é‡
+ * »ñµÃÄÚ´æÊ¹ÓÃÁ¿
  */
 unsigned int mem_getused(void)
 {
@@ -171,7 +170,7 @@ unsigned int mem_getused(void)
 }
 
 /**
- * è·å¾—å†…å­˜ç©ºä½™é‡
+ * »ñµÃÄÚ´æ¿ÕÓàÁ¿
  */
 unsigned int mem_getfree(void)
 {
@@ -185,7 +184,7 @@ unsigned int mem_getfree(void)
 }
 
 /**
- * è·å¾—å†…å­˜æ± æ€»å¤§å°
+ * »ñµÃÄÚ´æ³Ø×Ü´óĞ¡
  */
 unsigned int mem_getsize(void)
 {
@@ -193,10 +192,10 @@ unsigned int mem_getsize(void)
 }
 
 /**
- * å†…å­˜æ± åˆå§‹åŒ–å‡½æ•°
+ * ÄÚ´æ³Ø³õÊ¼»¯º¯Êı
  */
 void mem_init(void)
 {
-	mem_memset(memory, 0, sizeof(memory));			// åˆå§‹åŒ–å†…å­˜æ± 
-	mem_memset(memtbl, 0, sizeof(memtbl));			// åˆå§‹åŒ–å†…å­˜ç´¢å¼•è¡¨
+	mem_memset(memory, 0, sizeof(memory));			// ³õÊ¼»¯ÄÚ´æ³Ø
+	mem_memset(memtbl, 0, sizeof(memtbl));			// ³õÊ¼»¯ÄÚ´æË÷Òı±í
 }
